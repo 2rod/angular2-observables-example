@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TextChange} from '../text-change'
 
 @Component({
   selector: 'app-child2',
@@ -6,8 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./child2.component.css']
 })
 export class Child2Component implements OnInit {
+  text: string;
 
-  constructor() { }
+  constructor(private _textChange: TextChange) {
+    _textChange.subscribe({
+      next: text => {
+        this.text = text;
+        console.log('text: ',text)
+      }
+    })
+  }
 
   ngOnInit() {
   }
